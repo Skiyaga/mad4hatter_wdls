@@ -154,7 +154,9 @@ workflow MAD4HatTeR {
         input:
             amplicon_info_ch = generate_amplicon_info.amplicon_info_ch,
             denoised_asvs = denoise_amplicons_2.denoise_ch,
-            processed_asvs = denoise_amplicons_2.results_ch,
+            masked_pseudocigar_table = denoise_amplicons_2.masked_pseudocigar,
+            unmasked_pseudocigar_table = denoise_amplicons_2.unmasked_pseudocigar,
+            masked_asv_table = denoise_amplicons_2.alignment_table,
             docker_image = docker_image
     }
 
