@@ -190,6 +190,7 @@ workflow MAD4HatTeR {
             output_directory = output_directory,
             amplicon_info_ch = generate_amplicon_info.amplicon_info_ch,
             final_allele_table = build_alleletable.alleledata,
+            final_allele_table_collapsed = build_alleletable.alleledata_collapsed,
             sample_coverage = quality_control.sample_coverage,
             amplicon_coverage = quality_control.amplicon_coverage,
             dada2_clusters = denoise_amplicons_1.dada2_clusters,
