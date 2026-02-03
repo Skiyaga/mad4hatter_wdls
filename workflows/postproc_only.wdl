@@ -40,7 +40,7 @@ workflow postproc_only {
             denoised_asvs = denoise_amplicons_2.denoise_ch,
             masked_pseudocigar_table = denoise_amplicons_2.masked_pseudocigar,
             unmasked_pseudocigar_table = denoise_amplicons_2.unmasked_pseudocigar,
-            masked_asv_table = denoise_amplicons_2.alignment_table,
+            masked_asv_table = denoise_amplicons_2.aligned_asv_table,
             docker_image = docker_image
     }
 
