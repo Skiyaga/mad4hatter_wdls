@@ -34,7 +34,7 @@ workflow MAD4HatTeR {
         Int max_ee = 3 # Limit on number of expected errors within a read during filtering and trimming within DADA2
         Int cutadapt_minlen = 100
         Int allowed_errors = 0
-        Boolean just_concatenate = false
+        Boolean just_concatenate = true
         Boolean mask_tandem_repeats = true
         Boolean mask_homopolymers = true
         File? masked_fasta
