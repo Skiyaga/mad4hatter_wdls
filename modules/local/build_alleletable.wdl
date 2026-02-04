@@ -14,9 +14,9 @@ task build_alleletable {
         Rscript /opt/mad4hatter/bin/build_alleletable.R \
             --amplicon-info ~{amplicon_info_ch} \
             --denoised-asvs ~{denoised_asvs} \
-            --masked-pseudocigar-table ~${masked_pseudocigar_table} \
-            --unmasked-pseudocigar-table ~${unmasked_pseudocigar_table} \
-            --masked-asv-table ~${masked_asv_table}
+            --masked-pseudocigar-table ~{masked_pseudocigar_table} \
+            --unmasked-pseudocigar-table ~{unmasked_pseudocigar_table} \
+            --masked-asv-table ~{masked_asv_table}
     >>>
 
     output {
