@@ -7,7 +7,7 @@ task collapse_concatenated_reads {
     }
 
     command <<<
-        Rscript /opt/mad4hatter/bin/collapse_concatenated_reads.R \
+        python3 /opt/mad4hatter/bin/collapse_concatenated_reads.py \
             --clusters ~{clusters}
     >>>
 

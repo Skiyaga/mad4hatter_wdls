@@ -34,7 +34,7 @@ workflow MAD4HatTeR {
         Int max_ee = 3 # Limit on number of expected errors within a read during filtering and trimming within DADA2
         Int cutadapt_minlen = 100
         Int allowed_errors = 0
-        Boolean just_concatenate = false
+        Boolean just_concatenate = true
         Boolean mask_tandem_repeats = true
         Boolean mask_homopolymers = true
         File? masked_fasta
@@ -154,7 +154,9 @@ workflow MAD4HatTeR {
         input:
             amplicon_info_ch = generate_amplicon_info.amplicon_info_ch,
             denoised_asvs = denoise_amplicons_2.denoise_ch,
-            processed_asvs = denoise_amplicons_2.results_ch,
+            masked_pseudocigar_table = denoise_amplicons_2.masked_pseudocigar,
+            unmasked_pseudocigar_table = denoise_amplicons_2.unmasked_pseudocigar,
+            masked_asv_table = denoise_amplicons_2.aligned_asv_table,
             docker_image = docker_image
     }
 
@@ -188,6 +190,7 @@ workflow MAD4HatTeR {
             output_directory = output_directory,
             amplicon_info_ch = generate_amplicon_info.amplicon_info_ch,
             final_allele_table = build_alleletable.alleledata,
+            final_allele_table_collapsed = build_alleletable.alleledata_collapsed,
             sample_coverage = quality_control.sample_coverage,
             amplicon_coverage = quality_control.amplicon_coverage,
             dada2_clusters = denoise_amplicons_1.dada2_clusters,
@@ -201,6 +204,7 @@ workflow MAD4HatTeR {
 
     output {
         String allele_data = move_outputs.allele_data
+        String allele_table_collapsed = move_outputs.allele_table_collapsed
         String sample_coverage = move_outputs.sample_coverage
         String amplicon_coverage = move_outputs.amplicon_coverage
         String dada2_clusters = move_outputs.dada2_clusters

@@ -15,8 +15,8 @@ task preprocess_coverage {
             awk -v fname="$fname" -v OFS="\t" '{print fname, $0}' "$1"
         }
 
-        echo -e "SampleID\\tStage\\tReads" > preprocess_sample_coverage.txt
-        echo -e "SampleID\\tLocus\\tReads" > preprocess_amplicon_coverage.txt
+        echo -e "sample_name\\tstage\\treads" > preprocess_sample_coverage.txt
+        echo -e "sample_name\\ttarget_name\\treads" > preprocess_amplicon_coverage.txt
 
         echo "Processing sample files" >&2
         for file in ~{sep=" " sample_coverages}
