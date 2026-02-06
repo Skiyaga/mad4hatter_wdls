@@ -42,16 +42,20 @@ task get_amplicon_and_targeted_ref_from_config {
         logging.info("Copying amplicon info and targeted reference files to output directories")
         os.makedirs("amplicon_info_files", exist_ok=True)
         os.makedirs("targeted_reference_files", exist_ok=True)
-        for amplicon_file in amplicon_info_paths:
-            shutil.copy2(amplicon_file, "amplicon_info_files/")
-        for reference_file in targeted_reference_paths:
-            shutil.copy2(reference_file, "targeted_reference_files/")
+        with open("amplicon_info_paths.txt", "w") as amplicon_fofn:
+            with open("targeted_reference_paths.txt", "w") as ref_fofn:
+                for amplicon_file in amplicon_info_paths:
+                    shutil.copy2(amplicon_file, "amplicon_info_files/")
+                    amplicon_fofn.write(os.path.join("amplicon_info_files", os.path.basename(amplicon_file)) + "\n")
+                for reference_file in targeted_reference_paths:
+                    shutil.copy2(reference_file, "targeted_reference_files/")
+                    ref_fofn.write(os.path.join("targeted_reference_files", os.path.basename(reference_file)) + "\n")
         CODE
     >>>
 
     output {
-        Array[File] amplicon_info_files = glob("amplicon_info_files/*")
-        Array[File] targeted_reference_files = glob("targeted_reference_files/*")
+        Array[File] amplicon_info_files = read_lines("amplicon_info_paths.txt")
+        Array[File] targeted_reference_files = read_lines("targeted_reference_paths.txt")
     }
 
     runtime {
