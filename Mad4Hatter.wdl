@@ -32,8 +32,8 @@ workflow MAD4HatTeR {
         Int band_size = 16 # Limit on the net cumulative number of insertions of one sequence relative to the other in DADA2
         Int max_ee = 3 # Limit on number of expected errors within a read during filtering and trimming within DADA2
         Int cutadapt_minlen = 100
-        gtrim = false
-        quality_score = 20
+        Boolean gtrim = false
+        Int quality_score = 20
         Int allowed_errors = 0
         Boolean just_concatenate = true
         Boolean mask_tandem_repeats = true
