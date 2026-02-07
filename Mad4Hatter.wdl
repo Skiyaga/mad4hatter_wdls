@@ -32,6 +32,7 @@ workflow MAD4HatTeR {
         String dada2_pool = "pseudo" # Pooling method for DADA2 to process ASVs [Options: pseudo (default), true, false]
         Int band_size = 16 # Limit on the net cumulative number of insertions of one sequence relative to the other in DADA2
         Int max_ee = 3 # Limit on number of expected errors within a read during filtering and trimming within DADA2
+        Int max_mismatch = 0 # allow no errors when merging in dada2
         Int cutadapt_minlen = 100
         Int allowed_errors = 0
         Boolean just_concatenate = true
@@ -126,6 +127,7 @@ workflow MAD4HatTeR {
             band_size = band_size,
             omega_a = omega_a,
             max_ee = max_ee,
+            max_mismatch = max_mismatch,
             just_concatenate = just_concatenate,
             additional_memory = dada2_additional_memory,
             dada2_runtime_size = dada2_runtime_size,
