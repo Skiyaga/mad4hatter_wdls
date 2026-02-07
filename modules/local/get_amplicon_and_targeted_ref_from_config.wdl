@@ -57,7 +57,14 @@ task get_amplicon_and_targeted_ref_from_config {
             else:
                 missing_pools.append(pool)
         if missing_pools:
-            raise ValueError(f"Pools were not found in configuration: {', '.join(missing_pools)}. `--amplicon_info` and, if running Mad4Hatter or Mad4hatterPostProcessing, either `--refseq_fasta` or `--genome` must be provided when using bespoke pools.")
+            missing = ', '.join(missing_pools)
+            error_message = (
+                f"ERROR: The following pools were requested but not found in the configuration: {missing}.\n"
+                f"If you are using custom (bespoke) pools, you MUST provide the corresponding files manually:\n"
+                f"  - `--amplicon_info` must be specified\n"
+                f"  - and if running Mad4Hatter or Mad4hatterPostProcessing, EITHER `--refseq_fasta` OR `--genome` must also be provided."
+            )
+            raise ValueError(error_message)
 
         logging.info("Copying amplicon info and targeted reference files to output directories")
         os.makedirs("amplicon_info_files", exist_ok=True)
